@@ -2,7 +2,7 @@
 
 > **AI-Powered Conversational Interface for Argo Ocean Data with Dynamic Theming**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-🌊%20View%20App-blue?style=for-the-badge)]([https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/2b5b332a251c513db4fd98d8c8e052b2/2d1bbc0b-cb0f-448f-a929-9c970634f548/index.html](https://simplyudhay.github.io/floatchat/))
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-🌊%20View%20App-blue?style=for-the-badge)](https://simplyudhay.github.io/floatchat/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/simplyudhay/floatchat?style=for-the-badge)](https://github.com/simplyudhay/floatchat)
 
