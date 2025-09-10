@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloatChat - Ocean Data Explorer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌊%3C/text%3E%3C/svg%3E">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Leaflet.js for ocean maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="ocean-ripple">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+            </div>
+            <h2 class="loading-text">FloatChat</h2>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app hidden">
+        <!-- Animated Ocean Background -->
+        <div class="ocean-background">
+            <div class="wave-layer wave-1"></div>
+            <div class="wave-layer wave-2"></div>
+            <div class="wave-layer wave-3"></div>
+            
+            <!-- Floating Elements -->
+            <div class="floating-elements">
+                <div class="fish fish-1">🐠</div>
+                <div class="fish fish-2">🐟</div>
+                <div class="fish fish-3">🐡</div>
+                <div class="jellyfish jellyfish-1">🪼</div>
+                <div class="jellyfish jellyfish-2">🪼</div>
+                <div class="boat">⛵</div>
+            </div>
+            
+            <!-- Bubbles -->
+            <div class="bubbles">
+                <div class="bubble" style="--delay: 0s; --size: 20px;"></div>
+                <div class="bubble" style="--delay: 1s; --size: 15px;"></div>
+                <div class="bubble" style="--delay: 2s; --size: 25px;"></div>
+                <div class="bubble" style="--delay: 3s; --size: 18px;"></div>
+                <div class="bubble" style="--delay: 4s; --size: 22px;"></div>
+                <div class="bubble" style="--delay: 5s; --size: 16px;"></div>
+            </div>
+            
+            <!-- Light Beams -->
+            <div class="light-beams">
+                <div class="light-beam beam-1"></div>
+                <div class="light-beam beam-2"></div>
+                <div class="light-beam beam-3"></div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-icon">🌊</div>
+                        <h1>FloatChat</h1>
+                        <span class="beta-tag">Ocean AI</span>
+                    </div>
+                    
+                    <!-- Theme Toggle Switch -->
+                    <div class="theme-toggle-container">
+                        <button id="themeToggle" class="theme-toggle" role="switch" aria-label="Toggle dark/light theme" aria-checked="false">
+                            <div class="theme-toggle-track">
+                                <div class="theme-toggle-thumb">
+                                    <div class="theme-icon theme-icon-sun">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="12" r="5"/>
+                                            <line x1="12" y1="1" x2="12" y2="3"/>
+                                            <line x1="12" y1="21" x2="12" y2="23"/>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                            <line x1="1" y1="12" x2="3" y2="12"/>
+                                            <line x1="21" y1="12" x2="23" y2="12"/>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                        </svg>
+                                    </div>
+                                    <div class="theme-icon theme-icon-moon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="header-wave"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="chat-layout">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-content">
+                            <h3>Quick Queries</h3>
+                            <div class="query-suggestions">
+                                <button class="suggestion-btn" data-query="Show me ocean temperature in the Pacific">
+                                    🌡️ Pacific Temperature
+                                </button>
+                                <button class="suggestion-btn" data-query="What's the salinity near the equator?">
+                                    🧂 Equator Salinity
+                                </button>
+                                <button class="suggestion-btn" data-query="Display Argo float positions globally">
+                                    🗺️ Float Positions
+                                </button>
+                                <button class="suggestion-btn" data-query="Analyze temperature trends over time">
+                                    📈 Temperature Trends
+                                </button>
+                                <button class="suggestion-btn" data-query="Show me current ocean data for the Atlantic">
+                                    🌊 Atlantic Data
+                                </button>
+                                <button class="suggestion-btn" data-query="What are the latest float measurements?">
+                                    📊 Latest Measurements
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Chat Interface -->
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message bot-message welcome-message">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-text">
+                                        Welcome to FloatChat! I'm your AI assistant for exploring ocean data from Argo floats. 
+                                        Ask me about temperature, salinity, float positions, or trends in ocean data. 
+                                        How can I help you dive into the data today? 🌊
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Typing Indicator -->
+                        <div class="typing-indicator hidden" id="typingIndicator">
+                            <div class="message-avatar">🤖</div>
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="chat-input-container">
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    id="chatInput" 
+                                    class="chat-input"
+                                    placeholder="Ask about ocean data..."
+                                    autocomplete="off"
+                                >
+                                <button id="sendButton" class="send-button">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Visualization Panel -->
+                <div class="visualization-panel hidden" id="visualizationPanel">
+                    <div class="panel-header">
+                        <h3>Ocean Data Visualization</h3>
+                        <button class="close-panel" id="closePanelBtn">×</button>
+                    </div>
+                    <div class="panel-content">
+                        <div class="viz-tabs">
+                            <button class="tab-btn active" data-tab="chart">Charts</button>
+                            <button class="tab-btn" data-tab="map">Map</button>
+                        </div>
+                        <div class="viz-content">
+                            <div id="chartTab" class="tab-content active">
+                                <div class="chart-container" style="position: relative; height: 400px;">
+                                    <canvas id="dataChart"></canvas>
+                                </div>
+                            </div>
+                            <div id="mapTab" class="tab-content">
+                                <div id="oceanMap" style="height: 400px; border-radius: 8px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="attribution">
+                        Crafted by <strong>Udhayakumar R</strong>, Intern at Ministry of Defence
+                    </p>
+                    <div class="footer-waves">
+                        <div class="footer-wave"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
