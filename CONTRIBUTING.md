@@ -107,7 +107,7 @@ Thank you for your interest in contributing to FloatChat! This document provides
 
 For questions or discussions:
 - Open a GitHub issue
-- Email: [maintainer email]
+- Email: [simplyudhay@gmail.com]
 - Join our discussions
 
 Thank you for helping make ocean data more accessible! 🌊
