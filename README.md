@@ -2,6 +2,8 @@
 
 > **AI-Powered Conversational Interface for Argo Ocean Data with Dynamic Theming**
 
+**Co-Contributor** - [Prasana K](https://www.linkedin.com/in/prasana-k-21477321b)
+
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-🌊%20View%20App-blue?style=for-the-badge)](https://simplyudhay.github.io/floatchat/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/simplyudhay/floatchat?style=for-the-badge)](https://github.com/simplyudhay/floatchat)
